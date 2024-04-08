@@ -1,7 +1,7 @@
 import React from "react";
 import { Chart as ChartJS, registerables } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-const DoughnutChart = ({ waterUsed = "100L", totalCapacity = "150L" }) => {
+const DoughnutChart = ({ waterUsed, totalCapacity }) => {
   ChartJS.register(...registerables);
   // const percentage = (availableWaterLevel / totalCapacity) * 100;
 
@@ -12,19 +12,20 @@ const DoughnutChart = ({ waterUsed = "100L", totalCapacity = "150L" }) => {
         // labels: "dsfaghd",
         data: [waterUsed, totalCapacity - waterUsed],
         backgroundColor: [
-          "#36A2EB", // Blue for available water
-          "#FFCE56", // Yellow for remaining capacity
+          "#1E8FFF", // Blue for available water
+          "#5C5C5C", // Yellow for remaining capacity
         ],
-        hoverBackgroundColor: ["#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#1E8FFF", "#5C5C5C"],
       },
     ],
   };
   return (
-    <div>
+    <div className="w-100">
       <Doughnut
         data={data}
-        height={"50%"}
-        width={"50%"}
+        // height={"50%"}
+        // width={"50%"}
+
         options={{
           plugins: {
             tooltip: {

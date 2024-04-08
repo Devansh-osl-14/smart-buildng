@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import Header from "./Header";
-import { Display } from "react-7-segment-display";
-import { FaTemperatureHigh } from "react-icons/fa6";
-import { IoIosWater } from "react-icons/io";
-import GaugeChart from "react-gauge-chart";
 import "../components/Dashboard.css";
-import { ImMeter2 } from "react-icons/im";
 import GaugeComponent from "react-gauge-component";
 import LineChart from "./Chart/LineChart";
 import Current from "./Current/Current";
@@ -17,145 +12,232 @@ import DoughnutChart from "./Chart/DoughnutChart";
 import Tooltip from "@mui/material/Tooltip";
 import BarChart from "./Chart/Barchart";
 const Dashboard = () => {
-  const [ap2, setAp2] = useState();
-  const [ap10, setAp10] = useState();
+  const [ap2, setAp2] = useState(0);
+  const [ap10, setAp10] = useState(0);
+  const [currTemp, setCurrTemp] = useState(0);
+  const [currhumid, setCurrhumid] = useState(0);
+  const [currPre, setCurrPre] = useState(0);
+  const [p1, setP1] = useState(0);
+  const [p2, setP2] = useState(0);
+  const [p3, setP3] = useState(0);
+  const [car, setCar] = useState(0);
+  const [scooter, setScooter] = useState(0);
+  const [waterUse, setWaterUse] = useState(0);
   console.log(ap2);
   const productionData = [
-    { label: "January", value: 100 },
-    { label: "February", value: 150 },
-    { label: "March", value: 200 },
+    [
+      { label: "January", value: 100 },
+      { label: "February", value: 150 },
+      { label: "March", value: 200 },
+    ],
+    [
+      { label: "January", value: 100 },
+      { label: "February", value: 250 },
+      { label: "March", value: 160 },
+    ],
+    [
+      { label: "January", value: 60 },
+      { label: "February", value: 350 },
+      { label: "March", value: 100 },
+    ],
+    [
+      { label: "January", value: 160 },
+      { label: "February", value: 90 },
+      { label: "March", value: 70 },
+    ],
+    [
+      { label: "January", value: 55 },
+      { label: "February", value: 120 },
+      { label: "March", value: 230 },
+    ],
   ];
 
   const consumptionData = [
-    { label: "January", value: 80 },
-    { label: "February", value: 120 },
-    { label: "March", value: 180 },
-    // Add more data as needed
+    [
+      { label: "January", value: 80 },
+      { label: "February", value: 120 },
+      { label: "March", value: 180 },
+    ],
+    [
+      { label: "January", value: 60 },
+      { label: "February", value: 350 },
+      { label: "March", value: 100 },
+    ],
+    [
+      { label: "January", value: 160 },
+      { label: "February", value: 90 },
+      { label: "March", value: 70 },
+    ],
+    [
+      { label: "January", value: 100 },
+      { label: "February", value: 50 },
+      { label: "March", value: 90 },
+    ],
+    [
+      { label: "January", value: 220 },
+      { label: "February", value: 90 },
+      { label: "March", value: 160 },
+    ],
   ];
 
   const temp = [
-    { label: "Monday", value: 26 },
-    { label: "Tuesday", value: 32 },
-    { label: "Wednesday", value: 33 },
+    [
+      { label: "Monday", value: 26 },
+      { label: "Tuesday", value: 32 },
+      { label: "Wednesday", value: 33 },
+    ],
+    [
+      { label: "Monday", value: 22 },
+      { label: "Tuesday", value: 36 },
+      { label: "Wednesday", value: 25 },
+    ],
+    [
+      { label: "Monday", value: 15 },
+      { label: "Tuesday", value: 22 },
+      { label: "Wednesday", value: 12 },
+    ],
+    [
+      { label: "Monday", value: 23 },
+      { label: "Tuesday", value: 36 },
+      { label: "Wednesday", value: 33 },
+    ],
+    [
+      { label: "Monday", value: 40 },
+      { label: "Tuesday", value: 23 },
+      { label: "Wednesday", value: 33 },
+    ],
   ];
 
   const humidity = [
-    { label: "Monday", value: 80 },
-    { label: "Tuesday", value: 55 },
-    { label: "Wednesday", value: 92 },
-    // Add more data as needed
+    [
+      { label: "Monday", value: 80 },
+      { label: "Tuesday", value: 55 },
+      { label: "Wednesday", value: 92 },
+    ],
+    [
+      { label: "Monday", value: 20 },
+      { label: "Tuesday", value: 55 },
+      { label: "Wednesday", value: 96 },
+    ],
+    [
+      { label: "Monday", value: 36 },
+      { label: "Tuesday", value: 56 },
+      { label: "Wednesday", value: 85 },
+    ],
+    [
+      { label: "Monday", value: 63 },
+      { label: "Tuesday", value: 45 },
+      { label: "Wednesday", value: 50 },
+    ],
+    [
+      { label: "Monday", value: 60 },
+      { label: "Tuesday", value: 80 },
+      { label: "Wednesday", value: 45 },
+    ],
   ];
 
+  let ranArrNo = 0;
   const ranNum = () => {
-    console.log("fgdf");
+    // console.log("fgdf");
+    ranArrNo = Math.floor(Math.random() * 4 + 0);
     let ranNum1 = 0;
     ranNum1 = Math.floor(Math.random() * 100 + 1);
     setAp2(ranNum1);
-  };
-  const ranNum2 = () => {
     let ranNum2 = 0;
     ranNum2 = Math.floor(Math.random() * 100 + 1);
     setAp10(ranNum2);
+    let ranTemp = 0;
+    ranTemp = Math.floor(Math.random() * 50 + 1);
+    setCurrTemp(ranTemp);
+    let ranhumid = 0;
+    ranhumid = Math.floor(Math.random() * 100 + 1);
+    setCurrhumid(ranhumid);
+    let ranPre = 0;
+    ranPre = Math.floor(Math.random() * 400 + 1);
+    setCurrPre(ranPre);
+    let ranP1 = 0;
+    ranP1 = Math.floor(Math.random() * 100 + 1);
+    setP1(ranP1);
+    let ranP2 = 0;
+    ranP2 = Math.floor(Math.random() * 100 + 1);
+    setP2(ranP2);
+    let ranP3 = 0;
+    ranP3 = Math.floor(Math.random() * 100 + 1);
+    setP3(ranP3);
+    let ranCar = 0;
+    ranCar = Math.floor(Math.random() * 100 + 1);
+    setCar(ranCar);
+    let ranScooter = 0;
+    ranScooter = Math.floor(Math.random() * 100 + 1);
+    setScooter(ranScooter);
+    let ranWater = 0;
+    ranWater = Math.floor(Math.random() * 1000 + 1);
+    setWaterUse(ranWater);
   };
 
   useEffect(() => {
     const abc = setInterval(() => {
       ranNum();
-      ranNum2();
     }, 5000);
     return () => clearInterval(abc);
   }, []);
   const waterUsageData = [
-    { label: 1, data: 100 },
-    { label: 2, data: 200 },
-    { label: 3, data: 300 },
+    [
+      { label: 1, data: 100 },
+      { label: 2, data: 200 },
+      { label: 3, data: 300 },
+    ],
+    [
+      { label: 1, data: 150 },
+      { label: 2, data: 220 },
+      { label: 3, data: 500 },
+    ],
+    [
+      { label: 1, data: 120 },
+      { label: 2, data: 230 },
+      { label: 3, data: 160 },
+    ],
+    [
+      { label: 1, data: 170 },
+      { label: 2, data: 220 },
+      { label: 3, data: 330 },
+    ],
     // Add more data as needed
   ];
   const airPollutionArr = [
-    { label: "Monday", data: 50 },
-    { label: "Tuesday", data: 30 },
-    { label: "Wednesday", data: 60 },
-    // Add more data as needed
+    [
+      { label: "Monday", data: 50 },
+      { label: "Tuesday", data: 30 },
+      { label: "Wednesday", data: 60 },
+    ],
+    [
+      { label: "Monday", data: 80 },
+      { label: "Tuesday", data: 35 },
+      { label: "Wednesday", data: 55 },
+    ],
+    [
+      { label: "Monday", data: 56 },
+      { label: "Tuesday", data: 36 },
+      { label: "Wednesday", data: 20 },
+    ],
+    [
+      { label: "Monday", data: 60 },
+      { label: "Tuesday", data: 56 },
+      { label: "Wednesday", data: 45 },
+    ],
+    [
+      { label: "Monday", data: 56 },
+      { label: "Tuesday", data: 78 },
+      { label: "Wednesday", data: 23 },
+    ],
   ];
 
-  // setInterval(() => {
-  //   ranNum();
-  //   ranNum2();
-  // }, 5000);
-  // setInterval(() => {
-  // }, 5000);
-  const airPollution = 60;
   return (
     <>
       <Header />
       <Box bgcolor={"#000E1D"} height={"auto"} width={"100%"}>
-        {/* <Box className="row" padding={4}>
-          <Box className="col-6">
-            <Box
-              className="col-lg-6 col-md-12"
-              bgcolor={"#051527"}
-              padding={3}
-              borderRadius={2}
-              display={"flex"}
-            >
-              <Box width={{ lg: "100%", md: "50%" }}>
-                <Box
-                  className="border border-light border-2 mb-0"
-                  margin={3}
-                  mr={0}
-                >
-                  <Box
-                    className="d-flex justify-content-center m-5 mb-0 rounded-2"
-                    my={"50%"}
-                  >
-                    <FaTemperatureHigh className="icon-blue" size={30} />
-                    &nbsp;&nbsp;
-                    <Box  className="font-grey">
-                      <small className="m-0 p-0">TEMPERATURE</small>
-                    </Box>
-                  </Box>
-                  <Box className="d-flex justify-content-center">
-                    <Display
-                      value={25}
-                      height={80}
-                      className="icon-blue"
-                      className="text-center"
-                    />
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              className="col-lg-6 col-md-12"
-              bgcolor={"#051527"}
-              padding={3}
-              borderRadius={2}
-              display={"flex"}
-            >
-              <Box width={{ lg: "100%", md: "50%" }}>
-                <Box
-                  className="border border-light border-2 mb-0  d-flex "
-                  margin={3}
-                  ml={1}
-                >
-                  <Box className="d-flex   m-5 mb-0 rounded-2">
-                    <IoIosWater color="1E8FFF" size={30} />
-                    <Box  className="font-grey">
-                      <small className="m-0 p-0">HUMIDITY</small>
-                    </Box>
-                  </Box>
-                  <Box className="d-flex align-items-center">
-                    <h3>25</h3>
-
-                    <h3>%</h3>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-        </Box> */}
         <Grid container>
-          <Current />
+          <Current temp={currTemp} humid={currhumid} press={currPre} />
           <EnergyChart
             productionData={productionData}
             consumptionData={consumptionData}
@@ -187,7 +269,7 @@ const Dashboard = () => {
                         <FaCar size={20} color="#1E8FFF" />
                         <Box className="font-grey">P-1</Box>
                       </Box>
-                      <h3 className="text-center mt-1 mb-0">60%</h3>
+                      <h3 className="text-center mt-1 mb-0">{p1}%</h3>
                     </Box>
                   </Grid>
                   <Grid item xs={4} className="text-center">
@@ -196,7 +278,7 @@ const Dashboard = () => {
                         <FaCar size={20} color="#1E8FFF" />
                         <Box className="font-grey">P-2</Box>
                       </Box>
-                      <h3 className="text-center mt-1 mb-0">40%</h3>
+                      <h3 className="text-center mt-1 mb-0">{p2}%</h3>
                     </Box>
                   </Grid>
                   <Grid item xs={4} className="text-center">
@@ -205,7 +287,7 @@ const Dashboard = () => {
                         <FaCar size={20} color="#1E8FFF" />
                         <Box className="font-grey">P-3</Box>
                       </Box>
-                      <h3 className="text-center mt-1 mb-0">20%</h3>
+                      <h3 className="text-center mt-1 mb-0">{p3}%</h3>
                     </Box>
                   </Grid>
                 </Grid>
@@ -213,7 +295,10 @@ const Dashboard = () => {
             </Grid>
           </Grid>
           <Grid container lg={12}>
-            <Tooltip title="If PM2.5 is more than 50, it is a good day to breathe. If PM10 is more than 50, it is a bad day to breathe.">
+            <Tooltip
+              title="If PM2.5 is more than 50, it is a good day to breathe. If PM10 is more than 50, it is a bad day to breathe."
+              arrow
+            >
               <Grid
                 container
                 lg={5.5}
@@ -296,7 +381,7 @@ const Dashboard = () => {
                       <FaCar size={25} color="#1E8FFF" />
                       <h4>Car</h4>
                     </Box>
-                    <h2>50</h2>
+                    <h2>{car}</h2>
                   </Grid>
                   <Grid
                     item
@@ -318,7 +403,7 @@ const Dashboard = () => {
                       <GiScooter size={30} color="#1E8FFF" />
                       <h4>Scooter</h4>
                     </Box>
-                    <h2>80</h2>
+                    <h2>{scooter}</h2>
                   </Grid>
                 </Grid>
               </Box>
@@ -335,9 +420,9 @@ const Dashboard = () => {
             margin={3}
             marginTop={1}
           >
-            <Grid lg={6}>
+            <Grid lg={6} width={"fit-content"}>
               <h3 className="font-grey text-center mt-1">Water Level</h3>
-              <DoughnutChart totalCapacity={1000} waterUsed={700} />{" "}
+              <DoughnutChart totalCapacity={1000} waterUsed={waterUse} />{" "}
             </Grid>
           </Grid>
           <Grid
@@ -369,8 +454,8 @@ const Dashboard = () => {
             <LineChart
               data1={temp}
               data2={humidity}
-              labelX={"temp"}
-              labelY={"humidity"}
+              labelX={"Temp"}
+              labelY={"Humidity"}
             />
           </Grid>
           <Grid

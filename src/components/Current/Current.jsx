@@ -5,7 +5,7 @@ import { FaTemperatureHigh } from "react-icons/fa6";
 import { ImMeter2 } from "react-icons/im";
 import { IoIosWater } from "react-icons/io";
 
-const Current = () => {
+const Current = ({ temp, humid, press }) => {
   return (
     <Grid
       container
@@ -32,7 +32,7 @@ const Current = () => {
             </Box>
             <Box className="d-flex justify-content-center">
               <Display
-                value={25}
+                value={temp}
                 height={80}
                 color="#1E8FFF"
                 className="text-center"
@@ -72,7 +72,7 @@ const Current = () => {
               </Box>
             </Box>
             <Box className="d-flex justify-content-center">
-              <h3>25</h3>
+              <h3>{humid}</h3>
 
               <h3>%</h3>
             </Box>
@@ -98,7 +98,7 @@ const Current = () => {
               </Box>
             </Box>
             <Box className="d-flex justify-content-center">
-              <h3>160</h3>
+              <h3>{press}</h3>
               &nbsp;
               <h3>mbar</h3>
             </Box>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, registerables } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
@@ -10,15 +10,28 @@ const BarChart = ({ indexAxis, dataObj, label, labelX, labelY }) => {
   //     { floor: 3, waterUsage: 300 },
   //     // Add more data as needed
   //   ];
-
+  const [ranArray1, setRanArray1] = useState([]);
+  let randomNum = 0;
+  const ranNum = () => {
+    randomNum = Math.floor(Math.random() * 4 + 0);
+  };
+  useEffect(() => {
+    const abc = setInterval(() => {
+      ranNum();
+      // ranNum2();
+      console.log(randomNum);
+      setRanArray1(dataObj[randomNum]);
+    }, 5000);
+    return () => clearInterval(abc);
+  }, []);
   const data = {
-    labels: dataObj.map((entry) =>
+    labels: ranArray1.map((entry) =>
       indexAxis === "y" ? `Floor ${entry.label}` : entry.label
     ),
     datasets: [
       {
         label,
-        data: dataObj.map((entry) => entry.data),
+        data: ranArray1.map((entry) => entry.data),
         backgroundColor: "#36A2EB", // Blue color for bars
         borderColor: "#36A2EB",
         borderWidth: 1,
