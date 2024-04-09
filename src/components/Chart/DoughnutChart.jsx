@@ -20,7 +20,7 @@ const DoughnutChart = ({ waterUsed, totalCapacity }) => {
     ],
   };
   return (
-    <div className="w-100">
+    <div className="w-100 h-100 d-flex justify-content-center mx-auto">
       <Doughnut
         data={data}
         // height={"50%"}

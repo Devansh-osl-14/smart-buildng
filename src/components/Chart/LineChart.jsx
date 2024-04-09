@@ -9,8 +9,16 @@ import {
 import { Line } from "react-chartjs-2";
 
 const LineChart = ({ data1, data2, labelX, labelY }) => {
-  const [ranArray1, setRanArray1] = useState([]);
-  const [ranArray2, setRanArray2] = useState([]);
+  const [ranArray1, setRanArray1] = useState([
+    { label: "January", value: 100 },
+    { label: "February", value: 150 },
+    { label: "March", value: 200 },
+  ]);
+  const [ranArray2, setRanArray2] = useState([
+    { label: "January", value: 80 },
+    { label: "February", value: 120 },
+    { label: "March", value: 180 },
+  ]);
   let randomNum = 0;
   const ranNum = () => {
     randomNum = Math.floor(Math.random() * 4 + 0);
@@ -52,12 +60,43 @@ const LineChart = ({ data1, data2, labelX, labelY }) => {
     ],
   };
   return (
-    <div className="w-100 d-flex align-items-center">
+    <div className="w-100 h-100 d-flex align-items-center">
       <Line
         data={data}
         width={"fit-content"}
         height={"100%"}
         options={{
+          responsive:true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: labelX,
+                color: "white", // X-axis title color
+                font: {
+                  size: 14, // X-axis title font size
+                },
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: labelY,
+                color: "white", // Y-axis title color
+                font: {
+                  size: 14, // Y-axis title font size
+                },
+              },
+            },
+
+            //   plugins: {
+            //     legend: {
+            //       labels: {
+            //         color: "#FFFFFF", // Legend label color (white)
+            //       },
+            //     },
+            //   },
+          },
           plugins: {
             legend: {
               labels: {

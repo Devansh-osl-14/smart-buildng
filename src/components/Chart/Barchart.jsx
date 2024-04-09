@@ -10,7 +10,19 @@ const BarChart = ({ indexAxis, dataObj, label, labelX, labelY }) => {
   //     { floor: 3, waterUsage: 300 },
   //     // Add more data as needed
   //   ];
-  const [ranArray1, setRanArray1] = useState([]);
+  const [ranArray1, setRanArray1] = useState(
+    indexAxis === "y"
+      ? [
+          { label: 1, data: 100 },
+          { label: 2, data: 200 },
+          { label: 3, data: 300 },
+        ]
+      : [
+          { label: "Monday", data: 50 },
+          { label: "Tuesday", data: 30 },
+          { label: "Wednesday", data: 60 },
+        ]
+  );
   let randomNum = 0;
   const ranNum = () => {
     randomNum = Math.floor(Math.random() * 4 + 0);

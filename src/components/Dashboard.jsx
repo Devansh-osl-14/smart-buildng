@@ -12,17 +12,17 @@ import DoughnutChart from "./Chart/DoughnutChart";
 import Tooltip from "@mui/material/Tooltip";
 import BarChart from "./Chart/Barchart";
 const Dashboard = () => {
-  const [ap2, setAp2] = useState(0);
-  const [ap10, setAp10] = useState(0);
-  const [currTemp, setCurrTemp] = useState(0);
-  const [currhumid, setCurrhumid] = useState(0);
-  const [currPre, setCurrPre] = useState(0);
-  const [p1, setP1] = useState(0);
-  const [p2, setP2] = useState(0);
-  const [p3, setP3] = useState(0);
-  const [car, setCar] = useState(0);
-  const [scooter, setScooter] = useState(0);
-  const [waterUse, setWaterUse] = useState(0);
+  const [ap2, setAp2] = useState(33);
+  const [ap10, setAp10] = useState(66);
+  const [currTemp, setCurrTemp] = useState(25);
+  const [currhumid, setCurrhumid] = useState(66);
+  const [currPre, setCurrPre] = useState(123);
+  const [p1, setP1] = useState(33);
+  const [p2, setP2] = useState(56);
+  const [p3, setP3] = useState(65);
+  const [car, setCar] = useState(56);
+  const [scooter, setScooter] = useState(80);
+  const [waterUse, setWaterUse] = useState(700);
   console.log(ap2);
   const productionData = [
     [
@@ -256,36 +256,49 @@ const Dashboard = () => {
               lg={12}
               xs={12}
               padding={2}
-              className="d-flex justify-content-center"
+              className="d-flex justify-content-end"
             >
               <Grid item lg={3} md={4} xs={12}>
                 <h3 className="font-grey">Parking Availability : </h3>
               </Grid>
               <Grid item lg={8} md={8} xs={12}>
-                <Grid container>
-                  <Grid item xs={4} className="text-center">
-                    <Box className="border border-1 border-light rounded-1 w-75 ">
+                <Grid container columnGap={2}>
+                  <Grid item xs={3.5} className="text-center">
+                    <Box className="border border-1 border-light rounded-1">
                       <Box className="d-flex justify-content-center gap-3">
-                        <FaCar size={20} color="#1E8FFF" />
-                        <Box className="font-grey">P-1</Box>
+                        <FaCar
+                          size={20}
+                          color="#1E8FFF"
+                          // className="m-1"
+                          style={{ marginTop: "4%" }}
+                        />
+                        <Box className="font-grey mt-2">P-1</Box>
                       </Box>
                       <h3 className="text-center mt-1 mb-0">{p1}%</h3>
                     </Box>
                   </Grid>
-                  <Grid item xs={4} className="text-center">
-                    <Box className="border border-1 border-light rounded-1 w-75">
+                  <Grid item xs={3.5} className="text-center">
+                    <Box className="border border-1 border-light rounded-1">
                       <Box className="d-flex justify-content-center gap-3">
-                        <FaCar size={20} color="#1E8FFF" />
-                        <Box className="font-grey">P-2</Box>
+                        <FaCar
+                          size={20}
+                          color="#1E8FFF"
+                          style={{ marginTop: "4%" }}
+                        />
+                        <Box className="font-grey mt-2">P-2</Box>
                       </Box>
                       <h3 className="text-center mt-1 mb-0">{p2}%</h3>
                     </Box>
                   </Grid>
-                  <Grid item xs={4} className="text-center">
-                    <Box className="border border-1 border-light rounded-1 w-75">
+                  <Grid item xs={3.5} className="text-center">
+                    <Box className="border border-1 border-light rounded-1 ">
                       <Box className="d-flex justify-content-center gap-3">
-                        <FaCar size={20} color="#1E8FFF" />
-                        <Box className="font-grey">P-3</Box>
+                        <FaCar
+                          size={20}
+                          color="#1E8FFF"
+                          style={{ marginTop: "4%" }}
+                        />
+                        <Box className="font-grey mt-2">P-3</Box>
                       </Box>
                       <h3 className="text-center mt-1 mb-0">{p3}%</h3>
                     </Box>
@@ -355,7 +368,7 @@ const Dashboard = () => {
               marginTop={1}
             >
               <Box className="text-center w-100 p-2">
-                <h4 className="mt-3 mb-5 font-grey">Vehicle Count:</h4>
+                <h4 className="mt-3 mb-4 font-grey">Vehicle Count:</h4>
                 <Grid
                   container
                   columnGap={5}
@@ -372,9 +385,14 @@ const Dashboard = () => {
                     borderRadius={1}
                   >
                     <Box
+                      // textAlign={"center"}
+                      // display={"flex"}
+                      // my={"auto"}
+                      // justifyContent={"center"}
+                      // gap={2}
+                      height={"fit-content"}
                       textAlign={"center"}
                       display={"flex"}
-                      my={"auto"}
                       justifyContent={"center"}
                       gap={2}
                     >
@@ -390,7 +408,7 @@ const Dashboard = () => {
                     className="text-center"
                     padding={2}
                     border={2}
-                    {...{ marginTop: { lg: 0, xs: 5 } }}
+                    {...{ marginTop: { md: 0, xs: 5 } }}
                     paddingBottom={0}
                   >
                     <Box
@@ -409,25 +427,10 @@ const Dashboard = () => {
               </Box>
             </Grid>
           </Grid>
+
           <Grid
             container
-            lg={5.5}
-            md={12}
-            bgcolor={"#051527"}
-            // height={"auto"}
-            display={"flex"}
-            justifyContent={"center"}
-            margin={3}
-            marginTop={1}
-          >
-            <Grid lg={6} width={"fit-content"}>
-              <h3 className="font-grey text-center mt-1">Water Level</h3>
-              <DoughnutChart totalCapacity={1000} waterUsed={waterUse} />{" "}
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            lg={5.5}
+            lg={6.5}
             md={12}
             bgcolor={"#051527"}
             height={"auto"}
@@ -444,13 +447,42 @@ const Dashboard = () => {
           </Grid>
           <Grid
             container
+            lg={4.5}
+            md={12}
+            bgcolor={"#051527"}
+            // height={"auto"}
+            margin={3}
+            marginTop={1}
+          >
+            <Grid
+              container
+              lg={12}
+              xs={12}
+              width={"fit-content"}
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              <Grid item lg={12} className="mt-3 text-center">
+                <h3 className="font-grey mt-1" >Water Level</h3>
+              </Grid>
+              <Grid item lg={6} className="text-center">
+                <Box width={"100%"} height={"90%"}>
+                  <DoughnutChart totalCapacity={1000} waterUsed={waterUse} />{" "}
+                </Box>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid
+            container
             lg={5.5}
             md={12}
             bgcolor={"#051527"}
             height={"auto"}
             margin={3}
-            marginTop={1}
           >
+            <h3 className="font-grey mt-1 mx-auto">Tempreature and Humidity</h3>
+
             <LineChart
               data1={temp}
               data2={humidity}
@@ -467,6 +499,10 @@ const Dashboard = () => {
             margin={3}
             marginTop={1}
           >
+            <h3 className="font-grey text-center mt-1 mx-auto">
+              Air Pollution
+            </h3>
+
             <BarChart
               indexAxis={"x"}
               dataObj={airPollutionArr}

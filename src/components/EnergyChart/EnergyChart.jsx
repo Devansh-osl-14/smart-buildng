@@ -13,6 +13,8 @@ const EnergyChart = ({ productionData, consumptionData }) => {
       margin={3}
     >
       <Grid item lg={12} xs={12} my={"auto"}>
+        <h3 className="font-grey text-center mt-1">Energy Analysis</h3>
+
         <LineChart
           data1={productionData}
           data2={consumptionData}
